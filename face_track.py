@@ -24,7 +24,6 @@ def show():
     w = (int(screen_w) - 768)//2
     h = (int(screen_h) - 1280)//2
     gameDisplay.blit(ge, (w,h))
-    #gameDisplay.blit(eyes,(w,h))
     pygame.display.update()
     return gameDisplay
 
@@ -35,7 +34,6 @@ def move_eyes(gameDisplay, xcord, ycord,):
     img_y = (h-1180) + (ycord/20)-10
     gameDisplay.blit(eyes,(img_x,img_y))
     gameDisplay.blit(ge,(w,h))
-    #code to redraw images
     pygame.display.update()
 
 gameDisplay = show()
@@ -55,9 +53,10 @@ while 1:
     for x, y, w, h in faces[-1:]:
         cv2.rectangle(img, (x, y), (x+w, y+h), (255,0,0), 2)
         xcord = (x+w)//2
-        ycord = 2*(y+h)//3 # to look at the eyes
+        ycord = 2*(y+h)//3 
         print('xcord, ycord', xcord, ycord)
         move_eyes(gameDisplay, xcord, ycord)
+    #code to show your webcam feed.
     #cv2.imshow('img', img)
     #k = cv2.waitKey(30) & 0xff
     #if k == 27:
