@@ -20,50 +20,51 @@ cap = cv2.VideoCapture(0)
 print(screen_w, screen_h)
 
 def show():
-    gameDisplay = pygame.display.set_mode((int(screen_w), int(screen_h)))
-    pygame.display.set_caption('Gsingh')
+    screen = pygame.display.set_mode((int(screen_w), int(screen_h)))
+    pygame.display.set_caption('Yukino')
     os.environ['SDL_VIDEO_WINDOW_POS'] = "0,0"
-    gameDisplay.fill(bg)
+    screen.fill(bg)
     w = (int(screen_w) - 768)//2
     h = (int(screen_h) - 1280)//2
-    gameDisplay.blit(ge, (w,h))
+    screen.blit(ge, (w,h))
     pygame.display.update()
-    return gameDisplay
+    return screen
 
-def move_eyes(gameDisplay, xcord, ycord,):
+def move_eyes(screen, xcord, ycord,):
     w = int(screen_w)
     h = int(screen_h)
     img_x = ((w-768)/2) + (xcord/20)-10
     img_y = (h-1180) + (ycord/20)-10
-    gameDisplay.blit(eyes,(img_x,img_y))
-    gameDisplay.blit(ge,(w,h))
+    screen.blit(eyes,(img_x,img_y))
+    screen.blit(ge,(w,h))
     pygame.display.update()
 
-gameDisplay = show()
+if __name__ == '__main__':
+    screen = show()
 
-while 1:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            sys.exit()
-    ret, img = cap.read()
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    ret, img = cap.read()
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray, 1.3,5)
-    for (x,y,w,h) in faces:
-        cv2.rectangle(img, (x,y), (x+w, y+h), (255,0,0),2)
-    print(faces[-1:])
-    for x, y, w, h in faces[-1:]:
-        cv2.rectangle(img, (x, y), (x+w, y+h), (255,0,0), 2)
-        xcord = (x+w)//2
-        ycord = 2*(y+h)//3 
-        print('xcord, ycord', xcord, ycord)
-        move_eyes(gameDisplay, xcord, ycord)
-    #code to show your webcam feed.
-    #cv2.imshow('img', img)
-    #k = cv2.waitKey(30) & 0xff
-    #if k == 27:
-    #    break
-cap.release()
-cv2.destroyAllWindows()
+    while 1:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+        ret, img = cap.read()
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        ret, img = cap.read()
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        faces = face_cascade.detectMultiScale(gray, 1.3,5)
+        for (x,y,w,h) in faces:
+            cv2.rectangle(img, (x,y), (x+w, y+h), (255,0,0),2)
+        print(faces[-1:])
+        for x, y, w, h in faces[-1:]:
+            cv2.rectangle(img, (x, y), (x+w, y+h), (255,0,0), 2)
+            xcord = (x+w)//2
+            ycord = 2*(y+h)//3 
+            print('xcord, ycord', xcord, ycord)
+            move_eyes(screen, xcord, ycord)
+        #code to show your webcam feed.
+        #cv2.imshow('img', img)
+        #k = cv2.waitKey(30) & 0xff
+        #if k == 27:
+        #    break
+    cap.release()
+    cv2.destroyAllWindows()
 
