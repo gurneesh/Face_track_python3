@@ -31,15 +31,9 @@ def show():
 def move_eyes(gameDisplay, xcord, ycord,):
     w = int(screen_w)
     h = int(screen_h)
-    x = (w-768)//2
-    y = h-1280
-    ex = (w-768)/2
-    ey = h-1180
-    nx = ex + (xcord/20)-10
-    ny = ey + (ycord/20)-10
-    print('ex, ey', ex, ey)
-    print('nx, ny', nx, ny)
-    gameDisplay.blit(eyes,(nx,ny))
+    img_x = ((w-768)/2) + (xcord/20)-10
+    img_y = (h-1180) + (ycord/20)-10
+    gameDisplay.blit(eyes,(img_x,img_y))
     gameDisplay.blit(ge,(w,h))
     #code to redraw images
     pygame.display.update()
@@ -47,6 +41,9 @@ def move_eyes(gameDisplay, xcord, ycord,):
 gameDisplay = show()
 
 while 1:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            sys.exit()
     ret, img = cap.read()
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     ret, img = cap.read()
@@ -54,7 +51,6 @@ while 1:
     faces = face_cascade.detectMultiScale(gray, 1.3,5)
     for (x,y,w,h) in faces:
         cv2.rectangle(img, (x,y), (x+w, y+h), (255,0,0),2)
-    cv2.imshow('img', img)
     print(faces[-1:])
     for x, y, w, h in faces[-1:]:
         cv2.rectangle(img, (x, y), (x+w, y+h), (255,0,0), 2)
@@ -63,9 +59,9 @@ while 1:
         print('xcord, ycord', xcord, ycord)
         move_eyes(gameDisplay, xcord, ycord)
     #cv2.imshow('img', img)
-    k = cv2.waitKey(30) & 0xff
-    if k == 27:
-        break
+    #k = cv2.waitKey(30) & 0xff
+    #if k == 27:
+    #    break
 cap.release()
 cv2.destroyAllWindows()
 
