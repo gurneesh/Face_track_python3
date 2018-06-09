@@ -14,4 +14,5 @@ TO ADD YOUR OWN IMAGES:
 ======================
 * Remove background using image editing software like GIMP.
 * Remove eyes from the image and store in the different file.
-* Now you have to change the value of variables img_x, img_y in function show.
+* Now you have to change the value of variables img_x, img_y in function show.i
+* To change background just change the value of bg variable to you favorite color's rgb.

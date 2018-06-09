@@ -4,10 +4,7 @@ import cv2, sys, os, subprocess
 import pygame
 pygame.init()
 bg = (75,0,130)
-"""xcord, ycord 249.5 224.0
-ex, ey 576.0 0
-nx, ny 578.475 1.1999999999999993
-"""
+
 screen_resolution = output = subprocess.Popen('xrandr | grep "\\*" | cut -d" " -f4',shell=True, stdout=subprocess.PIPE).communicate()[0]
 screen_w, screen_h = screen_resolution.decode().split('x') 
 ge = pygame.image.load('test1.png')
