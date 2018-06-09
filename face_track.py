@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import cv2, sys, os, subprocess
 import pygame
 pygame.init()
@@ -60,7 +62,7 @@ while 1:
         ycord = 2*(y+h)//3 # to look at the eyes
         print('xcord, ycord', xcord, ycord)
         move_eyes(gameDisplay, xcord, ycord)
-    cv2.imshow('img', img)
+    #cv2.imshow('img', img)
     k = cv2.waitKey(30) & 0xff
     if k == 27:
         break
