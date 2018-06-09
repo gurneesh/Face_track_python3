@@ -5,6 +5,7 @@ REQUIREMENTS:
 * OpenCV for Face Detection.
 * pygame for making window.
 * Ubuntu (tested on Ubuntu 18.04, will add support for windows shortly).
+
 HOW TO RUN:
 ==========
 * Open terminal change drive these files are located.
