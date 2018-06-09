@@ -5,7 +5,11 @@ import pygame
 pygame.init()
 bg = (75,0,130)
 
-screen_resolution = output = subprocess.Popen('xrandr | grep "\\*" | cut -d" " -f4',shell=True, stdout=subprocess.PIPE).communicate()[0]
+if os.name == 'posix':
+    screen_resolution = output = subprocess.Popen('xrandr | grep "\\*" | cut -d" " -f4',shell=True, stdout=subprocess.PIPE).communicate()[0]
+else:
+    from win32api import GetSystemMetrics
+    screen_w = str(GetSystemMetrics(0)) + 'x' + str(GetSystemMetrics(1))
 screen_w, screen_h = screen_resolution.decode().split('x') 
 ge = pygame.image.load('test1.png')
 eyes = pygame.image.load('eyes.png')
