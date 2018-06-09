@@ -7,15 +7,17 @@ bg = (75,0,130)
 
 if os.name == 'posix':
     screen_resolution = output = subprocess.Popen('xrandr | grep "\\*" | cut -d" " -f4',shell=True, stdout=subprocess.PIPE).communicate()[0]
+    screen_w, screen_h = screen_resolution.decode().split('x')
 else:
-    from win32api import GetSystemMetrics
-    screen_w = str(GetSystemMetrics(0)) + 'x' + str(GetSystemMetrics(1))
-screen_w, screen_h = screen_resolution.decode().split('x') 
+    user32 = ctypes.windll.user32
+    screen_resolution = str(user32.GetSystemMetrics(0)) + 'x' + str(user32.GetSystemMetrics(1))
+    screen_w, screen_h = screen_resolution.split('x')
+
 ge = pygame.image.load('test1.png')
 eyes = pygame.image.load('eyes.png')
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 cap = cv2.VideoCapture(0)
-
+print(screen_w, screen_h)
 
 def show():
     gameDisplay = pygame.display.set_mode((int(screen_w), int(screen_h)))
