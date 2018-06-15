@@ -21,5 +21,4 @@ TO ADD YOUR OWN IMAGES:
 
 (Added Windows Support but I don't have a windows machine so can't test.)
 
-Inspired By: https://github.com/Aditya-Khadilkar/Face-tracking-with-Anime-characters/
 
